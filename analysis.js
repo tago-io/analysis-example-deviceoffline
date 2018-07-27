@@ -1,3 +1,11 @@
+/* 
+ * Analysis Example
+ * Generic Payload Parse
+ * 
+ * Learn how to parse from a hexadecimal raw payload into temperature and humidity variables
+ * Tutorial: https://tago.elevio.help/en/articles/118
+ */
+
 const Analysis = require('tago/analysis');
 const Device = require('tago/device');
 
