@@ -1,0 +1,30 @@
+{
+  "name": "generic-parse",
+  "version": "1.0.0",
+  "description": "You can just upload the `analysis.js` file.",
+  "main": "analysis.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tago-io/generic_payload_parser.git"
+  },
+  "author": "Tago LLC",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/tago-io/generic_payload_parser/issues"
+  },
+  "homepage": "https://github.com/tago-io/generic_payload_parser#readme",
+  "devDependencies": {
+    "eslint": "4.10.0",
+    "eslint-config-airbnb": "16.1.0",
+    "eslint-plugin-import": "2.8.0",
+    "eslint-plugin-jasmine": "2.9.1",
+    "eslint-plugin-jsx-a11y": "6.0.2",
+    "eslint-plugin-react": "7.4.0"
+  },
+  "dependencies": {
+    "tago": "5.4.12"
+  }
+}
