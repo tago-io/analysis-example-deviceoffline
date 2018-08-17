@@ -12,7 +12,9 @@ const Device = require('tago/device');
 // The function myAnalysis will run when you execute your analysis
 async function myAnalysis(context, scope) {
   // Create a variable called payload with the value sent by the device
-  const payload = scope[0].value;
+  // change payload to the name of you variable here ||
+  //                                                 \/
+  const payload = scope.find(x => x.variable === 'payload').value;
 
   // Create separate the string into two hexadecimal values
   const hexTemp = `0x${payload.substring(0,4)}`;
