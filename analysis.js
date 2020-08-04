@@ -13,7 +13,7 @@
  ** tag_key: Device tag Key to filter the devices.
  ** tag_value: Device tag Value to filter the devices.
  ** email_list: Email list comma separated.
- ** sms_list: SMS list comma separated.
+ ** sms_list: Phone number list comma separated. The phone number must include the country code
  **
  ** Steps to generate an account_token:
  ** 1 - Enter the following link: https://admin.tago.io/account/
@@ -26,7 +26,7 @@
 const { Analysis, Account, Services, Utils } = require("@tago-io/sdk");
 const moment = require("moment-timezone");
 
-async function func(context) {
+async function myAnalysis(context) {
   // Transform all Environment Variable to JSON.
   const env = Utils.envToJson(context.environment);
 
@@ -47,15 +47,14 @@ async function func(context) {
 
   const account = new Account({ token: env.account_token });
 
-  // You can comment line 28 and 29 to remove the Tag Filter.
-  // In this case, set line 38 to " filter = {}; "
-  const filter = { tags: [{ key: env.tag_key, value: env.tag_value }] };
+  // You can remove the comments on line 51 and 57 to use the Tag Filter.
+  //const filter = { tags: [{ key: env.tag_key, value: env.tag_value }] };
 
   const devices = await account.devices.list({
     page: 1,
     amount: 1000,
     fields: ["id", "name", "last_input"],
-    filter,
+    // filter,
   });
 
   if (!devices.length) {
