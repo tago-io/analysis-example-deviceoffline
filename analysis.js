@@ -24,7 +24,7 @@
  */
 
 const { Analysis, Account, Services, Utils } = require("@tago-io/sdk");
-const moment = require("moment-timezone");
+const dayjs = require("dayjs");
 
 async function myAnalysis(context) {
   // Transform all Environment Variable to JSON.
@@ -63,10 +63,10 @@ async function myAnalysis(context) {
 
   context.log("Checking devices: ", devices.map((x) => x.name).join(", "));
 
-  const now = moment();
+  const now = dayjs();
   const alert_devices = [];
   for (const device of devices) {
-    const last_input = moment(new Date(device.last_input));
+    const last_input = dayjs(new Date(device.last_input));
 
     // Check the difference in minutes.
     const diff = now.diff(last_input, "minute");
