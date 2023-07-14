@@ -17,7 +17,7 @@
  ** How to use:
  ** To analysis works, you need to add a new policy in your account. Steps to add a new policy:
  **  1 - Click the button "Add Policy" at this url: https://admin.tago.io/am;
- **  2 - In the Target selector, select the Analysis with the field set as "ID" and choose your Analysis in the list;
+ **  2 - In the Target selector, with the field set as "ID", choose your Analysis in the list;
  **  3 - Click the "Click to add a new permission" element and select "Device" with the rule "Access" with the field as "Any";
  **  4 - To save your new Policy, click the save button in the bottom right corner;
  */
@@ -29,9 +29,7 @@ async function myAnalysis(context) {
   // Transform all Environment Variable to JSON.
   const env = Utils.envToJson(context.environment);
 
-  if (!env.account_token) {
-    return context.log("You must setup an account_token in the Environment Variables.");
-  } else if (!env.checkin_time) {
+  if (!env.checkin_time) {
     return context.log("You must setup a checkin_time in the Environment Variables.");
   } else if (!env.tag_key) {
     return context.log("You must setup a tag_key in the Environment Variables.");
