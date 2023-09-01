@@ -8,31 +8,28 @@
  ** Environment Variables
  ** In order to use this analysis, you must setup the Environment Variable table.
  **
- ** account_token: Your account token
  ** checkin_time: Minutes between the last input of the device before sending the notification.
  ** tag_key: Device tag Key to filter the devices.
  ** tag_value: Device tag Value to filter the devices.
  ** email_list: Email list comma separated.
  ** sms_list: Phone number list comma separated. The phone number must include the country code
  **
- ** Steps to generate an account_token:
- ** 1 - Enter the following link: https://admin.tago.io/account/
- ** 2 - Select your Profile.
- ** 3 - Enter Tokens tab.
- ** 4 - Generate a new Token with Expires Never.
- ** 5 - Press the Copy Button and place at the Environment Variables tab of this analysis.
+ ** How to use:
+ ** To analysis works, you need to add a new policy in your account. Steps to add a new policy:
+ **  1 - Click the button "Add Policy" at this url: https://admin.tago.io/am;
+ **  2 - In the Target selector, with the field set as "ID", choose your Analysis in the list;
+ **  3 - Click the "Click to add a new permission" element and select "Device" with the rule "Access" with the field as "Any";
+ **  4 - To save your new Policy, click the save button in the bottom right corner;
  */
 
-const { Analysis, Account, Services, Utils } = require("@tago-io/sdk");
+const { Analysis, Services, Utils, Resources } = require("@tago-io/sdk");
 const dayjs = require("dayjs");
 
 async function myAnalysis(context) {
   // Transform all Environment Variable to JSON.
   const env = Utils.envToJson(context.environment);
 
-  if (!env.account_token) {
-    return context.log("You must setup an account_token in the Environment Variables.");
-  } else if (!env.checkin_time) {
+  if (!env.checkin_time) {
     return context.log("You must setup a checkin_time in the Environment Variables.");
   } else if (!env.tag_key) {
     return context.log("You must setup a tag_key in the Environment Variables.");
@@ -45,12 +42,10 @@ async function myAnalysis(context) {
   const checkin_time = Number(env.checkin_time);
   if (Number.isNaN(checkin_time)) return context.log("The checkin_time must be a number.");
 
-  const account = new Account({ token: env.account_token });
-
   // You can remove the comments on line 51 and 57 to use the Tag Filter.
   //const filter = { tags: [{ key: env.tag_key, value: env.tag_value }] };
 
-  const devices = await account.devices.list({
+  const devices = await Resources.devices.list({
     page: 1,
     amount: 1000,
     fields: ["id", "name", "last_input"],
