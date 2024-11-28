@@ -25,7 +25,7 @@
 const { Analysis, Services, Utils, Resources } = require("@tago-io/sdk");
 const dayjs = require("dayjs");
 
-async function myAnalysis(context) {
+async function startAnalysis(context) {
   // Transform all Environment Variable to JSON.
   const env = Utils.envToJson(context.environment);
 
@@ -105,7 +105,7 @@ async function myAnalysis(context) {
   }
 }
 
-module.exports = new Analysis(myAnalysis);
+Analysis.use(startAnalysis);
 
 // To run analysis on your machine (external)
-// module.exports = new Analysis(myAnalysis, { token: "YOUR-TOKEN" });
+// Analysis.use(myAnalysis, { token: "YOUR-TOKEN" });
